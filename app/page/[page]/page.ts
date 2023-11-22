@@ -27,12 +27,12 @@ export default class Page extends Component {
 								findNext(page, true) ? new Link({
 									class: 'btn',
 									text: findNext(page, true),
-									url: '/page/'+findNext(page, true)
+									url: location.href.match('page/') ? './'+findNext(page, true) : 'page/'+findNext(page, true)
 								}) : null, 
 								findNext(page) ? new Link({
 									class: 'btn next',
 									text: findNext(page),
-									url: '/page/'+findNext(page)
+									url: location.href.match('page/') ? './'+findNext(page) : 'page/'+findNext(page)
 								}) : null, 
 							]
 						})
@@ -44,7 +44,7 @@ export default class Page extends Component {
 
 	afterBuild(props: buildProps) {
 		let page = props.route.params.page;
-		fetch('/views/'+page+'.md')
+		fetch('../views/'+page+'.md')
 		.then(r => r.text())
 		.then(text => {
 			this.pageMarkdown = text;
