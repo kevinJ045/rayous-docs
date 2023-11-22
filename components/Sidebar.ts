@@ -6,10 +6,10 @@ function docItem(title: string) : Widget {
 		class: location.href.match(new RegExp(title+'$')) ? 'active' : '',
 		title: new Link({
 			text: title,
-			url: location.href.match('page/') ? './'+title : 'page/'+title
+			url: location.href.match('page/') ? (location.href.endsWith('/') ? '.' : '')+'./'+title : 'page/'+title
 		}),
 		onClick(){
-			location.href = location.href.match('page/') ? './'+title : 'page/'+title
+			location.href = location.href.match('page/') ? (location.href.endsWith('/') ? '.' : '')+'./'+title : 'page/'+title
 		}
 	});
 }
