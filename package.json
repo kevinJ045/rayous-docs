@@ -12,7 +12,7 @@
   "dependencies": {
     "marked": "^10.0.0",
     "prismjs": "^1.29.0",
-    "rayous": "^2.1.4",
+    "rayous": "^2.1.5",
     "showdown": "^2.1.0"
   }
 }
