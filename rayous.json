@@ -3,7 +3,12 @@
   "meta": {
     "author": "makano"
   },
-  "links": [],
+  "links": [
+  	{
+  		"type": "icon",
+  		"link": "https://raw.githubusercontent.com/kevinJ045/guilib/main/assets/logo.png"
+  	}
+  ],
   "scripts": [],
   "envprod": false
 }
