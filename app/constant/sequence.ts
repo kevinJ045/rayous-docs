@@ -57,7 +57,8 @@ export const Sequence = [
 
 		"Table",
 		"TableRow",
-	]
+	],
+	"Standalone"
 ];
 
 export function findNext(page: string, prev = false) : string {

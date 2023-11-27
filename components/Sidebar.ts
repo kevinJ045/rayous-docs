@@ -3,7 +3,7 @@ import { Image, Link, List, ListItem, Text, Widget } from "rayous";
 
 function docItem(title: string) : Widget {
 	return new ListItem({
-		class: location.href.match(new RegExp(title+'$')) || location.href.match(new RegExp(title+'/'+'$')) ? 'active' : '',
+		class: location.href.match(new RegExp('page/'+title+'$')) || location.href.match(new RegExp('page/'+title+'/'+'$')) ? 'active' : '',
 		title: new Link({
 			text: title,
 			url: location.href.match('page/') ? (location.href.endsWith('/') ? '.' : '')+'./'+title : 'page/'+title

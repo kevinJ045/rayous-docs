@@ -5,6 +5,7 @@ import { marked } from "marked";
 import 'prismjs';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-markup-templating';
 
 export class MarkdownWidget extends Widget {
 	constructor(markdown: string = "", options: options = {}){

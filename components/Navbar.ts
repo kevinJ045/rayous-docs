@@ -21,6 +21,13 @@ export class Navbar extends Widget {
 		</svg>
 		</a>`;
 
+		this.add(new Widget({
+			class: 'sidebar-toggle',
+			onClick(){
+				document.body.classList.toggle('sidebar-open');
+			}
+		}));
+
 		let title = new Text('Rayous', {
 			class: 'title'
 		});
