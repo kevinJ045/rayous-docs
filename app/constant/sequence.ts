@@ -58,13 +58,23 @@ export const Sequence = [
 		"Table",
 		"TableRow",
 	],
+	[
+		"Custom Widgets",
+		"Custom-Widgets",
+		"Widget-Models",
+	],
 	"Standalone"
 ];
 
 export function findNext(page: string, prev = false) : string {
 	let seq: string[] = [];
-	Sequence.filter(t => typeof t == "string").forEach((t: string) => seq.push(t));
-	Sequence.filter(t => Array.isArray(t)).forEach((t: string[]) => seq.push(...t.slice(0, t.length)));
+	Sequence.forEach((t: string[]) => {
+		if(Array.isArray(t)) {
+			seq.push(...t.slice(0, t.length));
+		} else {
+			seq.push(t)
+		}
+	});
 	let index = seq.indexOf(page);
 	let nextIndex = prev ? index-1 : index+1;
 	if(!prev && nextIndex >= seq.length) return null;
