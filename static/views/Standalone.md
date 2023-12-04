@@ -85,7 +85,7 @@ const { Component, Widget, Text } = Rayous.widgets;
 Rayous.component(class ExampleComponent extends Component {
 	build(){
 		return new Widget({
-			children: [ new Text('hi') ] // 'value'
+			children: [ new Text('hi') ]
 		})
 	}
 });
