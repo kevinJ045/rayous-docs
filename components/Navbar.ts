@@ -1,4 +1,6 @@
-import { Text, Widget } from "rayous";
+import { Link, Text, Widget } from "rayous";
+import { Style } from "rayous/extra";
+import { SVG } from "rayous/svg";
 
 
 
@@ -8,18 +10,6 @@ export class Navbar extends Widget {
 			class: 'navbar'
 		});
 
-
-		let div = document.createElement('div');
-		div.innerHTML = `<a href="https://github.com/kevinj045/rayous-docs" class="github-corner" aria-label="View source on GitHub">
-		<svg width="80" height="80" viewbox="0 0 250 250" style="fill:#ffffff; color:#fff; transition: .8s;z-index: 100;"
-			aria-hidden="true">
-		<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-		<path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="#000000" style="transform-origin: 130px 106px;"
-				class="octo-arm"></path>
-		<path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-				fill="#000000" class="octo-body"></path>
-		</svg>
-		</a>`;
 
 		this.add(new Widget({
 			class: 'sidebar-toggle',
@@ -39,9 +29,65 @@ export class Navbar extends Widget {
 			if(title1) {
 				title1.remove();
 				title.text(title1.innerText);
+
+				const titleInnerLinks = document.createElement('div');
+				titleInnerLinks.classList.add('title-links');
+
+				const scrollMaps = [];
+
+				const alltitles: HTMLElement[] = Array.from(document.querySelectorAll('h2,h3,h4,h5,h6'));
+				alltitles.forEach((title, index) => {
+					if(!title.id) title.id = title.textContent.toLocaleLowerCase().replace(/[\s\W]/g, '_');
+					const titleLink = document.createElement('a');
+					titleLink.classList.add('title-link');
+					titleLink.href = '#'+title.id;
+					titleLink.innerText = title.textContent;
+					const top = title.getBoundingClientRect().top - 120;
+
+					scrollMaps.push({
+						top,
+						el: titleLink,
+						height: alltitles[index+1] ? alltitles[index+1].getBoundingClientRect().top - 200 : top
+					})
+
+					titleLink.onclick = (e) => {
+						e.preventDefault();
+						const main = document.body.querySelector('#main-content')!;
+
+						title.style.color = '#09D0D0';
+						setTimeout(() => title.style.color = 'inherit', 1000);
+
+						main.scrollTop = top;
+					}
+
+					titleInnerLinks.appendChild(titleLink);
+				});
+
+				if(alltitles.length) {
+					const main: any = document.body.querySelector('#main-content')!;
+					main.scrollMaps = scrollMaps;
+					title.add(titleInnerLinks);
+				}
 			}
 		});
 
-		this.add(div);
+		this.add(new Link({
+			url: 'https://github.com/kevinj045/rayous-docs',
+			style: new Style({
+				position: 'absolute',
+				top: '10px',
+				right: '10px'
+			}),
+			children: [
+				new SVG({
+					path: '#ffffff|M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.20-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.20-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.20-.82 2.20-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.20 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8a8 8 0 0 0-8-8',
+					width: 30,
+					height: 30,
+					attr: {
+						viewBox: '0 0 16 16'
+					}
+				})
+			]
+		}));
 	}
 }

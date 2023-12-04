@@ -9,7 +9,7 @@
 :root{
 	--sidebar-size: 260px;
 
-	--navbar-height: 40px;
+	--navbar-height: 70px;
 }
 
 body{
@@ -18,6 +18,7 @@ body{
 	font-family: 'Inter', sans-serif;
 	margin: 0;
 }
+
 
 body > .main {
 	display: flex;
@@ -46,6 +47,75 @@ body > .main {
 		}
 	}
 
+}
+
+
+
+.navbar .title{
+	line-height: 40px;
+	font-weight: 700;
+	padding-left: 20px;
+	font-size: 34px;
+
+	.title-links{
+		width: 100%;
+		display: flex;
+		gap: 15px;
+		flex-wrap: nowrap;
+		overflow-x: scroll;
+		height: 30px;
+		line-height: 30px;
+		background: black;
+		padding-right: 100px;
+
+
+		&::-webkit-scrollbar{
+			display: none;
+		}
+	}
+
+	a {
+		font-size: 12px;
+		text-wrap: nowrap;
+		width: auto;
+
+		background: white;
+		color: black;
+		text-decoration: none;
+		padding: 0px 10px;
+		line-height: 20px;
+		box-sizing: border-box;
+		border-radius: 15px;
+		height: 20px;
+		margin-top: 5px;
+		transition: .2s;
+
+		&:hover, &.active{
+			background: #cba6f7;
+		}
+	}
+}
+
+.navbar{
+	padding-top: 30px;
+	border-bottom: 1px solid white;
+	transition: .3s;
+}
+
+body.scrolled-page{
+
+	&:not(:has(.navbar .title .title-links)){
+		--navbar-height: 40px !important;
+	}
+
+	.navbar{
+		padding-top: 0px;
+
+		.title{
+			font-size: 24px;
+			text-align: center;
+		}
+	}
 }
 
 
@@ -250,14 +320,6 @@ pre[class*="language-"] {
 	}
 }
 
-
-.navbar .title{
-	line-height: 40px;
-	font-weight: 700;
-	font-size: 24px;
-	padding-left: 20px;
-}
-
 table {
   width: 100%;
 	border-collapse: collapse;
@@ -382,14 +444,15 @@ a{
 	left: 20px;
 	top: 10px;
 	border-radius: 15px;
+	cursor: pointer;
 }
 
 @media only screen and (max-width: 700px){
 	.sidebar{
 		position: absolute;
 		left: calc(-1 * var(--sidebar-size));
-		height: calc(100dvh - var(--navbar-height));
-		top: var(--navbar-height);
+		height: calc(100dvh - (var(--navbar-height) + 1px)) !important;
+		top: calc(var(--navbar-height) + 1px);
 		z-index: 10;
 		transition: .2s;
 	}
