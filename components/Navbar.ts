@@ -19,7 +19,7 @@ export class Navbar extends Widget {
 		}));
 
 		let title = new Text('Rayous', {
-			class: 'title'
+			class: 'title animate-up'
 		});
 
 		this.add(title);
@@ -39,16 +39,20 @@ export class Navbar extends Widget {
 				alltitles.forEach((title, index) => {
 					if(!title.id) title.id = title.textContent.toLocaleLowerCase().replace(/[\s\W]/g, '_');
 					const titleLink = document.createElement('a');
-					titleLink.classList.add('title-link');
+					titleLink.classList.add('title-link', 'animate-up');
 					titleLink.href = '#'+title.id;
 					titleLink.innerText = title.textContent;
-					const top = title.getBoundingClientRect().top - 120;
+					const top = title.getBoundingClientRect().top;
+
+					const lastEl = Array.from(title.parentNode.children).pop();
 
 					scrollMaps.push({
 						top,
 						el: titleLink,
-						height: alltitles[index+1] ? alltitles[index+1].getBoundingClientRect().top - 200 : top
-					})
+						height: alltitles[index+1] ? alltitles[index+1].getBoundingClientRect().top : lastEl.getBoundingClientRect().top + lastEl.clientHeight*2
+					});
+
+					title.onclick = () => history.pushState(null, '', '#'+title.id);
 
 					titleLink.onclick = (e) => {
 						e.preventDefault();
@@ -57,16 +61,22 @@ export class Navbar extends Widget {
 						title.style.color = '#09D0D0';
 						setTimeout(() => title.style.color = 'inherit', 1000);
 
-						main.scrollTop = top;
+						main.scrollTop = top - 100;
+						title.click();
 					}
 
 					titleInnerLinks.appendChild(titleLink);
+
+					
 				});
 
 				if(alltitles.length) {
 					const main: any = document.body.querySelector('#main-content')!;
 					main.scrollMaps = scrollMaps;
 					title.add(titleInnerLinks);
+					alltitles.forEach(title => {
+						if(location.hash == '#'+title.id) document.body.querySelector('#main-content')!.scrollTop = title.getBoundingClientRect().top
+					})
 				}
 			}
 		});

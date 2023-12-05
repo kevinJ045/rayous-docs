@@ -346,7 +346,7 @@ table {
 
 .btn{
 	position: relative;
-	padding: 15px 30px;
+	padding: 8px 16px;
 	background-color: white;
 	color: black;
 	text-decoration: none;
@@ -391,39 +391,6 @@ table {
 	right: 10px;
 }
 
-.github-corner{
-	position: fixed;
-	top: 0;
-	right: -40px;
-	width: 120px;
-	height: 120px;
-}
-
-.github-corner:hover .octo-arm {
-	animation: octocat-wave 560ms ease-in-out;
-}
-@keyframes octocat-wave {
-	0%,
-	100% {
-		transform: rotate(0);
-	}
-	20%,
-	60% {
-		transform: rotate(-25deg);
-	}
-	40%,
-	80% {
-		transform: rotate(10deg);
-	}
-}
-@media (max-width: 500px) {
-	.github-corner:hover .octo-arm {
-		animation: none;
-	}
-	.github-corner .octo-arm {
-		animation: octocat-wave 560ms ease-in-out;
-	}
-}
 
 a{
 	color: white;
@@ -471,5 +438,89 @@ a{
 
 	.main-view{
 		width: 100vw !important;
+	}
+}
+
+blockquote{
+	margin: 10px 0;
+	padding: 10px;
+	padding-left: 30px;
+	background: rgba(202, 166, 247, 0.38);
+	border-radius: 10px;
+}
+
+h2,h3,h4,h5,h6{
+
+	cursor: pointer;
+
+	&::before{
+		content: "";
+		transition: .5s;
+		width: 0px;
+		margin-right: 0;
+		height: 20px;
+		display: inline-block;
+		background: currentColor;
+		clip-path: path("m 4.7836633,0.07642224 0.402645,0.4273 -0.410886,-0.28403 6.2181337,6.59842006 0.227091,-0.10726 1.749455,-0.82698 -0.11976,-0.0828 0.127933,-0.0605 z m 12.6689637,0.87054004 -4.353916,7.95287002 0.214392,0.2275 -0.03512,0.0677 1.450832,1.6258397 2.762451,-9.7529097 -0.176837,0.34118 z M 7.9600403,5.8130223 0.04088232,11.856272 l 0.578874,-0.27363 -0.524634,0.40035 8.19697598,-3.8748097 -0.03202,-0.25005 -0.245801,-1.91839 -0.03458,0.0264 z m 2.7047657,1.67542 a 1.8027919,1.8027919 0 0 0 -0.296192,0.0269 1.8027919,1.8027919 0 0 0 -1.6024737,1.7885 1.8027919,1.8027919 0 0 0 1.8028177,1.8027497 1.8027919,1.8027919 0 0 0 0.296461,-0.027 1.8027919,1.8027919 0 0 0 1.602137,-1.7883597 1.8027919,1.8027919 0 0 0 -1.80275,-1.80282 z m -4.1865347,3.1195697 3.300257,9.3991 -0.08166,-0.63757 0.226551,0.64528 -1.130662,-8.8251 -0.183726,-0.19879 -1.985869,-0.37522 0.0074,0.0211 z m 5.1787257,0.97848 c -0.09306,0.14061 -0.163173,0.2448 -0.163259,0.24493 l -1.36e-4,6e-5 -0.912892,1.66752 9.958929,-0.23431 z");
+	}
+
+	&:hover::before{
+		width: 20px;
+		margin-right: 5px;
+	}
+}
+
+#loader-widget{
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: black;
+	z-index: 999;
+
+	&::before{
+		content: "";
+		width: 140.6px;
+		height: 136.927px;
+		display: block;
+		position: absolute;
+		top: calc(50% - 70.3px);
+		left: calc(50% - 68.4635px);
+		
+		background: white;
+		clip-path: path("M 32.720926,0.39048395 35.47568,3.3139196 32.664543,1.3706867 75.206819,46.514748 76.760496,45.780912 88.729649,40.123006 87.910293,39.556518 88.785566,39.142599 Z M 119.3975,6.3464115 89.609548,60.757141 91.076342,62.313616 90.836063,62.776795 100.76214,73.900216 119.66186,7.174251 118.452,9.5084842 Z M 54.452575,39.638276 0.27249263,80.984057 4.2329442,79.111978 0.64358355,81.851031 56.7244,55.340951 56.505331,53.630197 54.823646,40.50525 54.587062,40.68587 Z M 72.957629,51.10091 A 12.334066,12.334066 0 0 0 70.931187,51.284949 12.334066,12.334066 0 0 0 59.967627,63.521234 12.334066,12.334066 0 0 0 72.30187,75.855011 12.334066,12.334066 0 0 0 74.330152,75.670287 12.334066,12.334066 0 0 0 85.291408,63.434961 12.334066,12.334066 0 0 0 72.957629,51.100704 Z m -28.642793,21.342994 22.579193,64.305326 -0.558689,-4.36203 1.549981,4.41478 -7.735588,-60.378222 -1.25699,-1.36005 -13.586615,-2.567125 0.05063,0.144363 z m 35.431013,6.694414 c -0.636684,0.962003 -1.116372,1.674835 -1.11696,1.675725 l -9.31e-4,4.1e-4 -6.245685,11.408583 68.135477,-1.603067 z");	
+		animation: 1s infinite keep-rotating;
+	}
+
+	@keyframes keep-rotating {
+		0%{
+			transform: rotate(0);
+		}
+		100%{
+			transform: rotate(360deg);
+		}
+	}
+}
+
+body > .main .animate-up, code .token {
+	animation: 1s 1 fadeUp;
+	animation-fill-mode: backwards;
+}
+
+@for $i from 1 through 100 {
+  body > .main .animate-up:nth-child(#{$i}),  code .token:nth-child(#{$i}) {
+		animation-delay: 200ms * $i;
+	}
+}
+
+@keyframes fadeUp {
+	0%{
+		opacity: 0;
+		margin-top: 100px;
+	}
+	100%{
+		opacity: 1;
+		margin-top: 0;
 	}
 }

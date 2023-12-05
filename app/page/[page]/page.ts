@@ -7,6 +7,8 @@ import { Ref, buildProps } from "rayous/extra";
 export default class Page extends Component {
 	pageMarkdown = "";
 
+	static updateMode: "reinit" | "refresh" = "refresh";
+
 	initState(props: any): void {
 		this.ref('pageMarkdown', '');
 	}
@@ -51,4 +53,6 @@ export default class Page extends Component {
 			Widget.from(document.body).emit('markdown_loaded', {});
 		});
 	}
+
+	
 }

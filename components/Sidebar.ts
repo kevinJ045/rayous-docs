@@ -32,7 +32,7 @@ function docSetup(titles: string[]): Widget {
 export class Sidebar extends Widget {
 	constructor(){
 		super({
-			class: 'sidebar'
+			class: 'sidebar animate-up'
 		});
 
 		this.add(new Widget({

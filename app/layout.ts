@@ -5,7 +5,18 @@ import { Navbar } from "@/components/Navbar";
 
 import "@/styles/main.scss";
 
+const enableActiveTitle = (map) => {
+	if(map.left-map.el.clientWidth > map.el.parentNode.clientWidth) map.el.parentNode.scrollLeft = map.left-(map.el.clientWidth*2);
+	else if(map.left+map.el.clientWidth < map.el.parentNode.scrollLeft) map.el.parentNode.scrollLeft = map.left-(map.el.clientWidth*2);
+	
+	map.active = true;
+	map.el.classList.add('active');
+}
 
+const disableActiveTitle = (map) => {
+	map.active = false;
+	map.el.classList.remove('active');
+}
 
 export default class extends Component {
 	build(props: buildProps): Widget {
@@ -19,29 +30,31 @@ export default class extends Component {
 					children: [
 						new Navbar,
 						new Widget({
-							class: 'main-content',
+							class: 'main-content animate-up',
 							id: 'main-content',
 							children: [ props.page! ],
-							onScroll(e){
-								if(e.original.target.scrollTop > 200) document.body.classList.add('scrolled-page');
+							onScroll(){
+								let main = this.raw().at(0);
+
+								if(main.scrollTop > 200) document.body.classList.add('scrolled-page');
 								else document.body.classList.remove('scrolled-page');
 
-								if(e.original.target.scrollMaps){
-									const scrollMaps = e.original.target.scrollMaps;
-									scrollMaps.forEach((map, index) => {
-										if(e.original.target.scrollTop > map.top && 
-											e.original.target.scrollTop < map.top+map.height){
-												if(scrollMaps[index-1]?.active == true) {
-													scrollMaps[index-1].active = false;
-													scrollMaps[index-1].el.classList.remove('active');
-												}
-												scrollMaps[index].active = true;
-												map.el.classList.add('active');
-											} else {
-												scrollMaps[index].active = false
-												map.el.classList.remove('active');
-											}
-									});
+								if(main.scrollMaps){
+									const scrollMaps = main.scrollMaps;
+									const topToBottom = main.scrollTop + (scrollMaps[scrollMaps.length-1].height - scrollMaps[scrollMaps.length-1].top) + 120;
+									let currentMap = scrollMaps.find(map => main.scrollTop+150 >= map.top-100 && main.scrollTop+150 <= map.height-100);
+									let clean = main.scrollTop < 200;
+
+									if(!scrollMaps.left){
+										scrollMaps.left = 1;
+										scrollMaps.forEach(map => map.left = map.el.getBoundingClientRect().left - 100)
+									}
+
+									if(topToBottom >= main.scrollHeight || main.scrollTop+(window.innerHeight - 70) >= main.scrollHeight){
+										currentMap = scrollMaps[scrollMaps.length-1];
+									} 
+									if(currentMap || clean) scrollMaps.forEach(map => disableActiveTitle(map));
+									if(currentMap && !currentMap.active) enableActiveTitle(currentMap);
 								}
 							}
 						})
