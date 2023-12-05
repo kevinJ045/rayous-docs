@@ -4,7 +4,10 @@ import { marked } from "marked";
 
 import 'prismjs';
 import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-markup-templating';
 
 export class MarkdownWidget extends Widget {

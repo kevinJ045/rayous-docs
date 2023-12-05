@@ -22,6 +22,7 @@ export const Sequence = [
 		'Component',
 		'Controller',
 		'Ref',
+		'JSX'
 	],
 	[
 		'Widgets',
@@ -57,6 +58,8 @@ export const Sequence = [
 
 		"Table",
 		"TableRow",
+
+		"React"
 	],
 	[
 		"Custom Widgets",
