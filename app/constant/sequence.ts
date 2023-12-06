@@ -66,7 +66,11 @@ export const Sequence = [
 		"Custom-Widgets",
 		"Widget-Models",
 	],
-	"Standalone"
+	[
+		"Standalone",
+		"Browser",
+		"Webpack"
+	]
 ];
 
 export function findNext(page: string, prev = false) : string {
